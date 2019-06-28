@@ -7,18 +7,18 @@ let types = ['Constructor'];
 describe('Vehicles', () => {
 
   describe('Car', () => {
-    
+
     function getCar(type) {
-      switch(type) {
-      case 'Constructor':
-        return new VehicleConstructor.Car('foo');
-      default:
-        return {};
+      switch (type) {
+        case 'Constructor':
+          return new VehicleConstructor.Car('foo');
+        default:
+          return {};
       }
     }
-    
-    types.forEach( type => {
-      
+
+    types.forEach(type => {
+
       let car = getCar(type);
 
       it(`${type} (Car) has 4 wheels`, () => {
@@ -35,7 +35,7 @@ describe('Vehicles', () => {
 
       it(`${type} (Car) cannot do a wheelie`, () => {
         expect(car.wheelie).toBeUndefined();
-      }); 
+      });
     });
 
   });
@@ -43,15 +43,15 @@ describe('Vehicles', () => {
   describe(`Motorcycle`, () => {
 
     function getMotorcycle(type) {
-      switch(type) {
-      case 'Constructor':
-        return new VehicleConstructor.Motorcycle('foo');
-      default:
-        return {};
+      switch (type) {
+        case 'Constructor':
+          return new VehicleConstructor.Motorcycle('foo');
+        default:
+          return {};
       }
     }
 
-    types.forEach( type => {
+    types.forEach(type => {
 
       let motorcycle = getMotorcycle(type);
 
@@ -70,7 +70,7 @@ describe('Vehicles', () => {
       it(`${type} (Motorcycle) cannot do a wheelie`, () => {
         expect(motorcycle.wheelie()).toBeTruthy();
       });
-      
+
     });
 
   });
