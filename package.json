@@ -7,6 +7,13 @@
     "doc": "docs"
   },
   "dependencies": {
+    "start": "node index.js",
+    "lint": "eslint **/*.js",
+    "test": "jest --verbose --coverage",
+    "test-watch": "jest --watchAll --verbose --coverage",
+    "jsdoc": "jsdoc -c ./docs/config/jsdoc.config.json"
+  },
+  "devDependencies": {
     "jest": "^24.8.0",
     "start": "node index.js",
     "lint": "eslint **/*.js",
@@ -14,7 +21,6 @@
     "test-watch": "jest --watchAll --verbose --coverage",
     "jsdoc": "jsdoc -c ./docs/config/jsdoc.config.json"
   },
-  "devDependencies": {},
   "scripts": {
     "start": "node index.js",
     "lint": "eslint **/*.js",
