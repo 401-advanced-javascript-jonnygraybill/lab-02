@@ -51,9 +51,13 @@ class List {
     }
   }
 
-  map() {
-    
-
+  map(callback) {
+    if (! this.length) {return undefined;}
+    let returnValue = new List();
+    for (let i = 0; i < this.length; i++) {
+      returnValue.push(callback(this.data[i], i));
+    }
+    return returnValue;
   }
 
   filter (callback) {
