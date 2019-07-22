@@ -22,63 +22,88 @@ class List {
    * @returns {*}
    */
   pop() {
-    let returnValue = this.data[this.length];
+    let returnValue = this.data[this.length - 1];
     delete this.data[this.length];
     this.length--;
     return returnValue;
   }
 
+  /**
+   * 
+   * @returns
+   */
   shift() {
-    if (! this.data[0]) { return undefined;}
-    let item = this.data[0];
+    let beginning = this.data[0];
     delete this.data[0];
-    this.reindex();
-    return item;
-  }
-
-  unshift(arr, item) {
-    for (let i = arr.length -1; i >= 0; i--) {
-      arr[i +1] = arr[i];
+    for (let i = 0; i < this.length; i++) {
+      this.data[i - 1] = this.data[i];
     }
-    arr[0] = item;
+    delete this.data[--this.length];
+    return beginning;
   }
 
+  /**
+   * 
+   * @returns
+   */
+  unshift(arr) {
+    let newData = new List();
+    newData.push(arr);
+    for (let i = 0; i < this.length; i++) {
+      newData.push(this.data[i]);
+    }
+    this.data = newData.data;
+    this.length++;
+    return this.length;
+  }
+
+  /**
+   * 
+   * @returns
+   */
   forEach(callback) {
     if (this.length) {
-      for (let i = 0; i <= this.length -1; i++) {
+      for (let i = 0; i <= this.length - 1; i++) {
         callback(this[i], i);
       }
     }
   }
 
+  /**
+   * 
+   * @returns
+   */
   map(callback) {
-    if (! this.length) {return undefined;}
-    let returnValue = new List();
+    let response = new List();
     for (let i = 0; i < this.length; i++) {
-      returnValue.push(callback(this.data[i], i));
+      response.push(callback(this.data[i], i, this.data));
     }
-    return returnValue;
+    return response.data;
   }
 
-  filter (callback) {
-    if (! this.length) {return undefined;}
-    let result = new List();
-    for (let i = 0; i <= this.length -1; i++) {
-      if (callback(this[i])) {
-        result.push(this[i]);
-      }
+  /**
+   * 
+   * @returns
+   */
+  filter(callback) {
+    let response = new List();
+    for (let i = 0; i < this.length; i++) {
+      if (callback(this.data[i], i, this.data)) { response.push(this.data[i]); }
     }
-    return result;
+    return response.data;
   }
 
+  /**
+   * 
+   * @returns
+   */
   reduce(callback, state) {
-    if (! this.length) {return undefined;} 
-    for ( let i = 0; i <= this.length -1; i++) {
-      state = callback(state,this[i], i);
+    let accum = state;
+    for (let i = 0; i < this.length; i++) {
+      accum = callback(accum, this.data[i], i, this.data);
     }
-    return state;
+    return accum;
   }
-
 }
 
 module.exports = List;
